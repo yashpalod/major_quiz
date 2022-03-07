@@ -13,7 +13,7 @@ include('connection.php');
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>View Category</title>
+    <title>View Subjects</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -55,7 +55,7 @@ include('connection.php');
 
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">All Orders</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">All Subjects</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -63,22 +63,22 @@ include('connection.php');
                                     <thead>
                                         <tr>
                                             <th>Sr No.</th>
-                                            <th>Category Name</th>
+                                            <th>Subject Name</th>
                                             <th>Edit</th>
                                             <th>Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $sql = "select * from category";
+                                        $sql = "select * from Subject";
                                         $res = mysqli_query($db_conn, $sql);
                                         $i = 1;
                                         while ($row = mysqli_fetch_assoc($res)) {
                                             echo "<tr>";
                                             echo "<td>$i</td>";
-                                            echo "<td>" . $row['catname'] . "</td>";
-                                            echo "<td><a href='editcat.php?cid=" . $row['catid'] . "' >  Edit</a></td>";
-                                            echo "<td><a href='deletecat.php?cid=" . $row['catid'] . "' >  Delete</a></td>";
+                                            echo "<td>" . $row['subname'] . "</td>";
+                                            echo "<td><a href='editsubject.php?sid=" . $row['sid'] . "' >  Edit</a></td>";
+                                            echo "<td><a href='deletesubject.php?sid=" . $row['sid'] . "' >  Delete</a></td>";
                                             echo "</tr>";
                                             $i++;
                                         }

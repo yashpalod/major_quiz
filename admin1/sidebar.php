@@ -29,8 +29,8 @@
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="addcategory.php">Add Subject</a>
-                <a class="collapse-item" href="viewcategory.php">View Subjects</a>
+                <a class="collapse-item" href="addsubject.php">Add Subject</a>
+                <a class="collapse-item" href="viewsubject.php">View Subjects</a>
             </div>
         </div>
     </li>
