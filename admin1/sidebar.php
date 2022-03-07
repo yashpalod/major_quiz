@@ -21,16 +21,44 @@
     <!-- Divider -->
     <hr class="sidebar-divider">
 
-    <!-- Nav Item - Pages Collapse Menu -->
+    <!-- Subject Categories -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-cog"></i>
-            <span>Categories</span>
+            <span>Subject Categories</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="addcategory.php">Add Category</a>
-                <a class="collapse-item" href="viewcategory.php">View Category</a>
+                <a class="collapse-item" href="addcategory.php">Add Subject</a>
+                <a class="collapse-item" href="viewcategory.php">View Subjects</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Teachers -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse" aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Teachers</span>
+        </a>
+        <div id="collapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="addteacher.php">Add Teachers</a>
+                <a class="collapse-item" href="viewteacher.php">View Teachers</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Students</span>
+        </a>
+        <div id="collapse1" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="addteacher.php">Add Student</a>
+                <a class="collapse-item" href="viewteacher.php">View Students</a>
             </div>
         </div>
     </li>
