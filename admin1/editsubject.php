@@ -2,9 +2,9 @@
 include('isvalid.php');
 include('connection.php');
 
-if (isset($_GET['cid'])) {
-    $cd = $_GET['cid'];
-    $sql = "select * from category where catid='$cd'";
+if (isset($_GET['sid'])) {
+    $cd = $_GET['sid'];
+    $sql = "select * from subject where sid='$cd'";
     $res = mysqli_query($db_conn, $sql);
     $row = mysqli_fetch_assoc($res);
 }
@@ -21,7 +21,7 @@ if (isset($_GET['cid'])) {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Edit Category</title>
+    <title>Edit Subject</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -60,17 +60,17 @@ if (isset($_GET['cid'])) {
                     <div class="row">
                         <div class="col-md-4 offset-md-4">
                             <div class="login-form bg-light mt-p-4">
-                                <form action="editcat_sub.php" method="POST" class="row-g-3">
+                                <form action="editsubject_sub.php" method="POST" class="row-g-3">
                                     <div class="text-center">
-                                        <h4>Edit Category</h4>
+                                        <h4>Edit Subject</h4>
                                     </div>
                                     <hr>
                                     <div class="col-12">
-                                        <input type="hidden" value="<?php echo $row['catid'];  ?>" name="cid" class="form-control">
+                                        <input type="hidden" value="<?php echo $row['sid'];  ?>" name="sid" class="form-control">
                                     </div>
                                     <div class="col-12">
-                                        <label>Category Name</label>
-                                        <input type="text" name="cname" class="form-control" value="<?php echo $row['catname'];  ?>">
+                                        <label>Subject Name</label>
+                                        <input type="text" name="sname" class="form-control" value="<?php echo $row['subname'];  ?>">
                                     </div><br>
                                     <div class="col-12">
                                         <input type="submit" class="btn btn-primary mx-auto w-100" name="submit" value="Edit">

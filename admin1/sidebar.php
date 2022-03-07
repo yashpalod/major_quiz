@@ -25,7 +25,7 @@
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-cog"></i>
-            <span>Subject Categories</span>
+            <span>Subjects</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
@@ -49,7 +49,7 @@
         </div>
     </li>
 
-    <!-- Nav Item - Pages Collapse Menu -->
+    <!-- Students -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-cog"></i>
@@ -59,6 +59,20 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="addteacher.php">Add Student</a>
                 <a class="collapse-item" href="viewteacher.php">View Students</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Quiz Questions -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse2" aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Questions</span>
+        </a>
+        <div id="collapse2" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="addteacher.php">Add Questions</a>
+                <a class="collapse-item" href="viewteacher.php">View Questions</a>
             </div>
         </div>
     </li>
