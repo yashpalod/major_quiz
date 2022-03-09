@@ -1,0 +1,23 @@
+admin side
+________________________
+1.
+adding 5 subjects in database
+adding 10 questions with 4 choice in each subject and store in database
+storing correct option for each questions
+
+2.
+match selected option by user to correct option and show result to user
+
+user side
+________________________
+1.
+showing all subjects
+after selecting any subject show stored questions
+store options selected by user 
+
+2.
+add timer to quiz
+add timer to particular questions
+prevent user for attempting quiz second time after submitting and show alert you already attempt the quiz
+
+

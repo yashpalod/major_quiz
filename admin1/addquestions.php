@@ -2,17 +2,66 @@
 include('isvalid.php');
 include('connection.php');
 
-if (isset($_GET['sid'])) {
-    $cd = $_GET['sid'];
-    $sql = "select * from subject where sid='$cd'";
-    $res = mysqli_query($db_conn, $sql);
-    $row = mysqli_fetch_assoc($res);
+if (isset($_POST['submit'])) {
+    $question_number = $_POST['question_number'];
+    $sid = $_POST['cname'];
+    $question_text = $_POST['question_text'];
+    $correct_choice = $_POST['correct_choice'];
+    // Choice Array
+    $choice = array();
+    $choice[1] = $_POST['choice1'];
+    $choice[2] = $_POST['choice2'];
+    $choice[3] = $_POST['choice3'];
+    $choice[4] = $_POST['choice4'];
+
+    // First Query for Questions Table
+
+    $query = "INSERT INTO questions (";
+    $query .= "qid,sid, ques )";
+    $query .= "VALUES (";
+    $query .= " '{$question_number}',{$sid},'{$question_text}' ";
+    $query .= ")";
+
+    $result = mysqli_query($db_conn, $query);
+
+    //Validate First Query
+    if ($result) {
+        foreach ($choice as $option => $value) {
+            if ($value != "") {
+                if ($correct_choice == $option) {
+                    $is_correct = 1;
+                } else {
+                    $is_correct = 0;
+                }
+
+                //Second Query for Choices Table
+                $query = "INSERT INTO options (";
+                $query .= "ques_no,is_correct,options)";
+                $query .= " VALUES (";
+                $query .=  "'{$question_number}','{$is_correct}','{$value}' ";
+                $query .= ")";
+
+                $insert_row = mysqli_query($db_conn, $query);
+                // Validate Insertion of Choices
+
+                if ($insert_row) {
+                    continue;
+                } else {
+                    die("2nd Query for Choices could not be executed" . $query);
+                }
+            }
+        }
+        $message = "Question has been added successfully";
+    }
 }
 
-?>
+$query = "SELECT * FROM questions";
+$questions = mysqli_query($db_conn, $query);
+$total = mysqli_num_rows($questions);
+$next = $total + 1;
 
-<!DOCTYPE html>
-<html lang="en">
+?>
+<html>
 
 <head>
     <meta charset="utf-8">
@@ -60,34 +109,52 @@ if (isset($_GET['sid'])) {
                     <div class="row">
                         <div class="col-md-4 offset-md-4">
                             <div class="login-form bg-light mt-p-4">
-                                <form action="editsubject_sub.php" method="POST" class="row-g-3">
+                                <form action="addquestions.php" method="POST" class="row-g-3">
                                     <div class="text-center">
                                         <h4>Add Questions</h4>
                                     </div>
                                     <hr>
                                     <div class="col-12">
-                                        <input type="hidden" value="<?php echo $row['sid'];  ?>" name="sid" class="form-control">
-                                    </div>
+                                        <label>Question Number</label>
+                                        <input type="number" name="question_number" class="form-control" value="<?php echo $next; ?>">
+                                    </div><br>
                                     <div class="col-12">
                                         <label>Question</label>
-                                        <textarea name="qname" class="form-control" cols="10" rows="5"></textarea>
+                                        <textarea name="question_text" class="form-control" cols="10" rows="5"></textarea>
                                     </div><br>
                                     <div class="col-12">
                                         <label>Option1</label>
-                                        <textarea name="option1" class="form-control" cols="10" rows="2"></textarea>
+                                        <textarea name="choice1" class="form-control" cols="10" rows="2"></textarea>
                                     </div><br>
                                     <div class="col-12">
                                         <label>Option2</label>
-                                        <textarea name="option2" class="form-control" cols="10" rows="2"></textarea>
+                                        <textarea name="choice2" class="form-control" cols="10" rows="2"></textarea>
                                     </div><br>
                                     <div class="col-12">
                                         <label>Option3</label>
-                                        <textarea name="option3" class="form-control" cols="10" rows="2"></textarea>
+                                        <textarea name="choice3" class="form-control" cols="10" rows="2"></textarea>
                                     </div><br>
                                     <div class="col-12">
                                         <label>Option4</label>
-                                        <textarea name="option4" class="form-control" cols="10" rows="2"></textarea>
+                                        <textarea name="choice4" class="form-control" cols="10" rows="2"></textarea>
                                     </div><br>
+                                    <div class="col-12">
+                                        <label>Correct Option Number</label>
+                                        <input type="number" name="correct_choice" class="form-control" min="1" max="4">
+                                    </div><br>
+                                    <div class="col-12">
+                                        <label>Select Category</label>
+                                        <select name="cname" class="form-control">
+                                            <?php
+                                            $sql = "select * from subject";
+                                            $res = mysqli_query($db_conn, $sql);
+                                            while ($row = mysqli_fetch_assoc($res)) {
+                                                echo "<option value=" . $row['sid'] . ">" . $row['subname'] . "</option>";
+                                            }
+                                            ?>
+                                        </select>
+                                    </div><br>
+
                                     <div class="col-12">
                                         <input type="submit" class="btn btn-primary mx-auto w-100" name="submit" value="Add">
                                     </div><br>

@@ -10,7 +10,7 @@ if (isset($_POST['submit'])) {
     if (mysqli_num_rows($res) == 1) {
         $row = mysqli_fetch_assoc($res);
         session_start();
-        $_SESSION['USNM'] = $row['uname'];
+        $_SESSION['USNM'] = $row['username'];
         header("Location:home.php");
     } else {
         header("Location:index.php");
