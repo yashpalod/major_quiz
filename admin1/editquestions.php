@@ -2,63 +2,30 @@
 include('isvalid.php');
 include('connection.php');
 
-if (isset($_POST['submit'])) {
-    $question_number = $_POST['question_number'];
-    $sid = $_POST['sname'];
-    $question_text = $_POST['question_text'];
-    $correct_choice = $_POST['correct_choice'];
-    // Choice Array
-    $choice = array();
-    $choice[1] = $_POST['choice1'];
-    $choice[2] = $_POST['choice2'];
-    $choice[3] = $_POST['choice3'];
-    $choice[4] = $_POST['choice4'];
-
-    // First Query for Questions Table
-
-    $query = "INSERT INTO questions (";
-    $query .= "qid,sid, ques )";
-    $query .= "VALUES (";
-    $query .= " '{$question_number}',{$sid},'{$question_text}' ";
-    $query .= ")";
-
-    $result = mysqli_query($db_conn, $query);
-
-    //Validate First Query
-    if ($result) {
-        foreach ($choice as $option => $value) {
-            if ($value != "") {
-                if ($correct_choice == $option) {
-                    $is_correct = 1;
-                } else {
-                    $is_correct = 0;
-                }
-
-                //Second Query for Choices Table
-                $query = "INSERT INTO options (";
-                $query .= "ques_no,is_correct,options)";
-                $query .= " VALUES (";
-                $query .=  "'{$question_number}','{$is_correct}','{$value}' ";
-                $query .= ")";
-
-                $insert_row = mysqli_query($db_conn, $query);
-                // Validate Insertion of Choices
-
-                if ($insert_row) {
-                    continue;
-                } else {
-                    die("2nd Query for Choices could not be executed" . $query);
-                }
-            }
-        }
-        $message = "Question has been added successfully";
-    }
+if (isset($_GET['qid'])) {
+    $cd = $_GET['qid'];
+    $sql = "select * from quiz where qid='$cd'";
+    $res = mysqli_query($db_conn, $sql);
+    $row = mysqli_fetch_assoc($res);
 }
 
-$query = "SELECT * FROM questions";
-$questions = mysqli_query($db_conn, $query);
-$total = mysqli_num_rows($questions);
-$next = $total + 1;
+// if (isset($_POST['submit'])) {
+//     $sid = $_POST['sname'];
+//     $question_text = $_POST['question_text'];
+//     $correct_choice = $_POST['correct_choice'];
+
+//     $choice1 = $_POST['choice1'];
+//     $choice2 = $_POST['choice2'];
+//     $choice3 = $_POST['choice3'];
+//     $choice4 = $_POST['choice4'];
+
+
+//     $sql = "insert into quiz values('','$sid','$question_text','$choice1','$choice2','$choice3','$choice4','$correct_choice')";
+//     $res = mysqli_query($db_conn, $sql);
+//     if (mysqli_affected_rows($db_conn)) {
+//         header("Location:demo.php");
+//     }
+// }
 
 ?>
 <html>
@@ -70,7 +37,7 @@ $next = $total + 1;
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Add Question</title>
+    <title>Edit Question</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -109,38 +76,37 @@ $next = $total + 1;
                     <div class="row">
                         <div class="col-md-4 offset-md-4">
                             <div class="login-form bg-light mt-p-4">
-                                <form action="addquestions.php" method="POST" class="row-g-3">
+                                <form action="editquestions.php" method="POST" class="row-g-3">
                                     <div class="text-center">
-                                        <h4>Add Questions</h4>
+                                        <h4>Edit Questions</h4>
                                     </div>
                                     <hr>
                                     <div class="col-12">
-                                        <label>Question Number</label>
-                                        <input type="number" name="question_number" class="form-control" value="<?php echo $next; ?>">
-                                    </div><br>
+                                        <input type="hidden" value="<?php echo $row['qid'];  ?>" name="qid" class="form-control">
+                                    </div>
                                     <div class="col-12">
                                         <label>Question</label>
-                                        <textarea name="question_text" class="form-control" cols="10" rows="5"></textarea>
+                                        <textarea name="question_text" class="form-control" cols="10" rows="5"><?php echo $row['ques'];  ?></textarea>
                                     </div><br>
                                     <div class="col-12">
                                         <label>Option1</label>
-                                        <textarea name="choice1" class="form-control" cols="10" rows="2"></textarea>
+                                        <textarea name="choice1" class="form-control" cols="10" rows="2"><?php echo $row['opt1'];  ?></textarea>
                                     </div><br>
                                     <div class="col-12">
                                         <label>Option2</label>
-                                        <textarea name="choice2" class="form-control" cols="10" rows="2"></textarea>
+                                        <textarea name="choice2" class="form-control" cols="10" rows="2"><?php echo $row['opt2'];  ?></textarea>
                                     </div><br>
                                     <div class="col-12">
                                         <label>Option3</label>
-                                        <textarea name="choice3" class="form-control" cols="10" rows="2"></textarea>
+                                        <textarea name="choice3" class="form-control" cols="10" rows="2"><?php echo $row['opt3'];  ?></textarea>
                                     </div><br>
                                     <div class="col-12">
                                         <label>Option4</label>
-                                        <textarea name="choice4" class="form-control" cols="10" rows="2"></textarea>
+                                        <textarea name="choice4" class="form-control" cols="10" rows="2"><?php echo $row['opt4'];  ?></textarea>
                                     </div><br>
                                     <div class="col-12">
-                                        <label>Correct Option Number</label>
-                                        <input type="number" name="correct_choice" class="form-control" min="1" max="4">
+                                        <label>Correct Option</label>
+                                        <input type="text" name="correct_choice" class="form-control" value="<?php echo $row['corr'];  ?>">
                                     </div><br>
                                     <div class="col-12">
                                         <label>Select Category</label>

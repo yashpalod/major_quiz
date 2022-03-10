@@ -1,6 +1,7 @@
 <?php
 include('isvalid.php');
 include('connection.php');
+
 ?>
 
 <!DOCTYPE html>
@@ -55,7 +56,7 @@ include('connection.php');
 
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">All Subjects</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">All Questions</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -64,20 +65,32 @@ include('connection.php');
                                         <tr>
                                             <th>Sr No.</th>
                                             <th>Subject Name</th>
+                                            <th>Question</th>
+                                            <th>Option1</th>
+                                            <th>Option2</th>
+                                            <th>Option3</th>
+                                            <th>Option4</th>
+                                            <th>Correct Option</th>
                                             <th colspan="2">Manage</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $sql = "select * from subject";
+                                        $sql = "select * from quiz";
                                         $res = mysqli_query($db_conn, $sql);
                                         $i = 1;
                                         while ($row = mysqli_fetch_assoc($res)) {
                                             echo "<tr>";
                                             echo "<td>$i</td>";
-                                            echo "<td>" . $row['subname'] . "</td>";
-                                            echo "<td><a href='editsubject.php?sid=" . $row['sid'] . "' >  Edit</a></td>";
-                                            echo "<td><a href='deletesubject.php?sid=" . $row['sid'] . "' >  Delete</a></td>";
+                                            echo "<td>" . $row['sid'] . "</td>";
+                                            echo "<td>" . $row['ques'] . "</td>";
+                                            echo "<td>" . $row['opt1'] . "</td>";
+                                            echo "<td>" . $row['opt2'] . "</td>";
+                                            echo "<td>" . $row['opt3'] . "</td>";
+                                            echo "<td>" . $row['opt4'] . "</td>";
+                                            echo "<td>" . $row['corr'] . "</td>";
+                                            echo "<td><a href='editquestions.php?qid=" . $row['qid'] . "' >  Edit</a></td>";
+                                            echo "<td><a href='deletequestion.php?qid=" . $row['qid'] . "' >  Delete</a></td>";
                                             echo "</tr>";
                                             $i++;
                                         }
